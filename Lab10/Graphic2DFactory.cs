@@ -2,7 +2,6 @@ namespace Lab10;
 
 public interface IGraphic2DFactory
 {
-    public readonly string Name;
-
+    public string Name { get; }
     public IGraphic2D Create();
 }
