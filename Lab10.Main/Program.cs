@@ -1,24 +1,28 @@
-﻿namespace Lab10.Main;
+﻿namespace Lab10;
 
 public class Program
 {
     static void Main()
     {
         Console.Clear();
-        List<IGraphic2DFactory> availableShapeTypes = new List<IGraphic2DFactory>();
+        List<IGraphic2DFactory> availableShapeTypes = new List<IGraphic2DFactory>()
+        {
+            new CircleFactory(),
+            new RectangleFactory()
+        };
+
         List<IGraphic2D> builtShapes = new List<IGraphic2D>();
         bool running = true;
 
-        Console.WriteLine("Welcome to the drawing factory!");
+        Console.WriteLine("Welcome to the drawing factory!\n");
 
         // Main menu
         while (running)
         {
-            Console.WriteLine(@" 
-    1 - Display Drawing
-    2 - Add Graphic
-    3 - Remove Graphic
-    4 - Exit Program");
+            Console.WriteLine(@"1 - Display Drawing
+2 - Add Graphic
+3 - Remove Graphic
+4 - Exit Program");
             Console.Write("Please select an option from above: ");
 
             string input = Console.ReadLine();
@@ -60,7 +64,7 @@ public class Program
                     string factoryIndexInput = Console.ReadLine()?.Trim();
 
                     // Checks if the user inputs a correct number
-                    if (!int.TryParse(factoryIndexInput, out int factoryIndex) || factoryIndex < 1 || factoryIndex >= availableShapeTypes.Count)
+                    if (!int.TryParse(factoryIndexInput, out int factoryIndex) || factoryIndex < 1 || factoryIndex > availableShapeTypes.Count)
                     {
                         Console.WriteLine("Invalid index.");
                         Console.WriteLine("Press any key to return to the menu.");
@@ -70,7 +74,7 @@ public class Program
 
                     try
                     {
-                        IGraphic2D newShape = availableShapeTypes[factoryIndex].Create();
+                        IGraphic2D newShape = availableShapeTypes[factoryIndex - 1].Create();
                         if (newShape != null)
                         {
                             builtShapes.Add(newShape);
@@ -117,7 +121,7 @@ public class Program
                     string removeIndexInput = Console.ReadLine()?.Trim();
 
                     // Checks if the user put in a correct number
-                    if (!int.TryParse(removeIndexInput, out int removeIndex) || removeIndex < 1 || removeIndex >= builtShapes.Count)
+                    if (!int.TryParse(removeIndexInput, out int removeIndex) || removeIndex < 1 || removeIndex > builtShapes.Count)
                     {
                         Console.WriteLine("Invalid index.");
                         Console.WriteLine("Press any key to return to the menu.");
@@ -125,7 +129,7 @@ public class Program
                         break;
                     }
 
-                    builtShapes.RemoveAt(removeIndex);
+                    builtShapes.RemoveAt(removeIndex - 1);
                     Console.WriteLine("Graphic removed.");
                     Console.WriteLine("Press any key to return to the menu.");
                     Console.ReadKey(true);

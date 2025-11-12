@@ -15,6 +15,6 @@ public class CircleFactory : IGraphic2DFactory
         Console.Write("Radius: ");
         int radius = int.Parse(Console.ReadLine());
 
-        return new CircleFactory(x, y, radius);
+        return new Circle(x, y, radius);
     }
 }

@@ -28,4 +28,9 @@ public class Rectangle : AbstractGraphic2D
     {
         return (x >= LowerBoundX && x <= UpperBoundX) && (y >= LowerBoundY && y <= UpperBoundY);
     }
+
+    public override string ToString()
+    {
+        return $"Rectangle: Left = {Left}, Top = {Top}, Width = {Width}, Height = {Height}";
+    }
 }

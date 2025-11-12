@@ -28,4 +28,9 @@ public class Circle : AbstractGraphic2D
         decimal dy = y - CenterY;
         return (dx * dx) + (dy * dy) <= Radius * Radius;
     }
+
+    public override string ToString()
+    {
+        return $"Circle: Center X = {CenterX}, Center Y = {CenterY}, Radius = {Radius}";
+    }
 }
